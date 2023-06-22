@@ -1,10 +1,25 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   imports = [
     ./common.nix
   ];
 
+
+
   ## Make sure networking is disabled in every way possible.
+  nixpkgs = {
+    overlays = [
+      (self: super: {
+        linuxNoNetwork = pkgs.linuxPackagesFor (pkgs.linux.override {
+          structuredExtraConfig = with lib.kernel; {
+            CONFIG_NET = no;
+          };
+          ignoreConfigErrors = true;
+        });
+      })
+    ];
+  };
+  boot.kernelPackages = pkgs.linuxNoNetwork;
 
   boot.initrd.network.enable = false;
   networking.dhcpcd.enable = false;
