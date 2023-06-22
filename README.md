@@ -3,5 +3,5 @@
 2. Flake support
 
 # Building
-1. `nix build .#image-name`
-2. Image is is ``./result`
+1. E.g. `nix build .#gpg-airgapped`
+2. Image is in `./result`
