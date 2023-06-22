@@ -8,30 +8,19 @@
   };
   outputs = { self, nixpkgs, nixos-generators, ... }: {
     packages.x86_64-linux = {
-      iso = nixos-generators.nixosGenerate {
+      gpg-airgapped = nixos-generators.nixosGenerate {
         system = "x86_64-linux";
         modules = [
-          ./configuration.nix
+          ./gpg-airgapped.nix
         ];
         format = "iso";
-        
-        # you can also define your own custom formats
-        # customFormats = { "myFormat" = <myFormatModule>; ... };
-        # format = "myFormat";
       };
-      qcow = nixos-generators.nixosGenerate {
+      rescue-image = nixos-generators.nixosGenerate {
         system = "x86_64-linux";
         modules = [
-          ./configuration.nix
+          ./rescue-image.nix
         ];
         format = "qcow";
-      };
-      openstack = nixos-generators.nixosGenerate {
-        system = "x86_64-linux";
-        modules = [
-          ./configuration.nix
-        ];
-        format = "openstack";
       };
     };
   };

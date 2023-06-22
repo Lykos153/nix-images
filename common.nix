@@ -4,4 +4,5 @@
     font = "Lat2-Terminus16";
     keyMap = "de";
   };
+  system.stateVersion = "23.05";
 }

@@ -1,20 +1,8 @@
-# This module defines a small NixOS installation CD.  It does not
-# contain any graphical stuff.
 { config, pkgs, ... }:
 {
   imports = [
-    <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix>
-
-    # Provide an initial copy of the NixOS channel so that the user
-    # doesn't need to run "nix-channel --update" first.
-    <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
-
     ./common.nix
   ];
-
-  isoImage.isoBaseName = pkgs.lib.mkForce "gpg-airgapped";
-  isoImage.squashfsCompression = "lz4";
-
 
   ## Make sure networking is disabled in every way possible.
 
@@ -40,7 +28,7 @@
     git
     gitAndTools.git-extras
     gnupg
-    (haskell.lib.justStaticExecutables haskellPackages.hopenpgp-tools)
+    # (haskell.lib.justStaticExecutables haskellPackages.hopenpgp-tools)
     paperkey
     parted
     pcsclite
